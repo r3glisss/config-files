@@ -66,24 +66,6 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=/home/reglisse/riscv/_install/bin:$PATH
-
-#export PATH=/home/reglisse/riscv-gcc/bin:$PATH
-
-export PATH=/home/reglisse/opt/retdec/bin:$PATH
-
-clion(){
-	~/opt/clion-2018.3.4/bin/clion.sh &	
-}
-
-compile(){
-	clang -O -c $1 --target=riscv32
-}
-
-link(){
-	riscv64-unknown-elf-gcc $1 -o riscv.out -march=rv32imac -mabi=ilp32
-}
-
 cherche(){
 #find . -name "*" -type f -exec grep -Hn $1 {} \;
 	grep --color -nri $1 ../*
