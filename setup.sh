@@ -66,15 +66,7 @@ cp functions ~/local-opt/
 cp aliases ~/local-opt/
 
 # Vim configuration
-sudo sh -c 'cat >> /etc/vim/vimrc.local << EOF
-syntax on
-set tabstop=2
-set background=dark
-set mouse=""
-set number
-set paste
-set ignorecase
-EOF'
+sudo cp .vimrc /etc/vim/vimrc.local 
 
 # Zsh configuration
 sudo apt-get install -y zsh powerline fonts-powerline
