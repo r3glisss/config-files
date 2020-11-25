@@ -1,0 +1,8 @@
+cherche(){
+  grep --color -nri $1 *
+}
+
+cherche_ext(){
+  find . -type f -name "*$1"
+}
+
