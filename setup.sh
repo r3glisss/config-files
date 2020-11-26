@@ -60,7 +60,6 @@ sudo apt install -y \
 				zlib1g-dev
 
 # Desktop configuration
-setxkbmap fr
 mkdir ~/local-opt
 cp functions ~/local-opt/
 cp aliases ~/local-opt/
@@ -76,6 +75,11 @@ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 sed -i 's/robbyrussell/agnoster/g' ~/.zshrc
 sed -i 's/source.*oh-my-zsh.sh/DISABLE_MAGIC_FUNCTIONS=true\n&/' ~/.zshrc
 
+# Keyboard
+cat >> ~/.zshrc << EOF
+setxkbmap fr
+EOF
+
 # Custom aliases
 cat >> ~/.zshrc << EOF
 source ~/local-opt/aliases
@@ -83,7 +87,7 @@ EOF
 
 # Custom functions
 cat >> ~/.zshrc << EOF
-# source /local-opt/functions
+source ~/local-opt/functions
 EOF
 
 # Tmux configuration
