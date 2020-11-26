@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 # Scala dependencies
 echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
 curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
@@ -19,6 +21,7 @@ sudo apt install -y \
 				binutils \
 				bison \
 				build-essential \
+				clang \
 				cloc \
 				cmake \
 				cmake-curses-gui \
@@ -47,6 +50,7 @@ sudo apt install -y \
 				linux-headers-$(uname -r) \
 				linux-tools-common \
 				linux-tools-generic \
+				llvm \
 				ltrace \
 				ninja-build \
 				nmap \
@@ -54,7 +58,6 @@ sudo apt install -y \
 				patchutils \
 			 	pkg-config \
 				python \
-				python2 \
 				python3-dev \
 				python3-pip \
 				qemu \
@@ -134,7 +137,7 @@ EOF
 
 # Python 2
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
-sudo python2 get-pip.py
+sudo python get-pip.py
 
 # Do some cleaning
 sudo apt-get autoremove -y
