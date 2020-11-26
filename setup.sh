@@ -57,7 +57,7 @@ sudo apt install -y \
 				vim \
 				xclip \
 				zip \
-				zlib1g-dev \
+				zlib1g-dev
 
 # Desktop configuration
 setxkbmap fr
