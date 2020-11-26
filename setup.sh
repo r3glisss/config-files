@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo add-apt-repository universe
+
 sudo apt-get update
 sudo apt-get upgrade -y
 
@@ -47,6 +49,7 @@ sudo apt install -y \
 				patchutils \
 			 	pkg-config \
 				python \
+				python2 \
 				python3-dev \
 				python3-pip \
 				qemu \
@@ -66,6 +69,12 @@ cp aliases ~/local-opt/
 
 # Vim configuration
 cp .vimrc ~/.vimrc
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+cat >> ~/.vimrc << EOF
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+EOF
 
 # Zsh configuration
 sudo apt-get install -y zsh powerline fonts-powerline
@@ -90,13 +99,28 @@ cat >> ~/.zshrc << EOF
 source ~/local-opt/functions
 EOF
 
+# Powerline
+cat >> ~/.zshrc << EOF
+if [ -f /usr/share/powerline/bindings/zsh/powerline.sh ]; then
+  powerline-daemon -q
+  POWERLINE_ZSH_CONTINUATION=1
+  POWERLINE_ZSH_SELECT=1
+  source /usr/share/powerline/bindings/zsh/powerline.sh
+fi
+EOF
+
 # Tmux configuration
 # Customize tmux
 cat >> ~/.tmux.conf << EOF
 set-option -g mouse off
 set-option -g history-limit 5000
 set-option -g status-bg colour231
+source "/usr/share/powerline/bindings/tmux/powerline.conf"
 EOF
+
+# Python 2
+curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+sudo python2 get-pip.py
 
 # Do some cleaning
 sudo apt-get autoremove -y

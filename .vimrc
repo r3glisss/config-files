@@ -45,9 +45,6 @@ set t_Co=256
 " Powerline
 set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 
-" C synthax
-let g:ycm_global_ycm_extra_conf="~/.vim/.ycm_extra_conf.py"
-
 " Command Alias
 command Hexedit %!xxd
 command HexeditRevert %!xxd -r
