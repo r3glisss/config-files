@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#sudo apt-get update
-#sudo apt-get upgrade
+sudo apt-get update
+sudo apt-get upgrade
 
 # Essential packages
 sudo apt install -y \
@@ -66,7 +66,7 @@ cp functions ~/local-opt/
 cp aliases ~/local-opt/
 
 # Vim configuration
-sudo cp .vimrc /etc/vim/vimrc.local 
+cp .vimrc ~/.vimrc
 
 # Zsh configuration
 sudo apt-get install -y zsh powerline fonts-powerline
