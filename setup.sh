@@ -58,8 +58,8 @@ sudo apt install -y \
 				python3-dev \
 				python3-pip \
 				qemu \
-			 	sed \
-				scala \
+			 	sbt \
+				sed \
 				texinfo \
 				tmux \
 				vbindiff \
@@ -96,21 +96,29 @@ setxkbmap fr
 EOF
 
 # Custom aliases
-cat >> ~/.zshrc << EOF
+cat >> ~/.zshenv << EOF
 source ~/local-opt/aliases
 EOF
 
 # Custom functions
-cat >> ~/.zshrc << EOF
+cat >> ~/.zshenv << EOF
+source ~/local-opt/functions
+EOF
+
+# Custom aliases
+cat >> ~/.bashrc << EOF
+source ~/local-opt/aliases
+EOF
+
+# Custom functions
+cat >> ~/.bashrc << EOF
 source ~/local-opt/functions
 EOF
 
 # Powerline
+git clone https://github.com/powerline/fonts.git && (cd fonts && sh ./install.sh)
 cat >> ~/.zshrc << EOF
 if [ -f /usr/share/powerline/bindings/zsh/powerline.sh ]; then
-  powerline-daemon -q
-  POWERLINE_ZSH_CONTINUATION=1
-  POWERLINE_ZSH_SELECT=1
   source /usr/share/powerline/bindings/zsh/powerline.sh
 fi
 EOF

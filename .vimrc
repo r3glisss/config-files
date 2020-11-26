@@ -8,9 +8,9 @@ syntax on
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-Plug 'rhysd/vim-clang-format' 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'oblitum/youcompleteme'
+" Plug 'rhysd/vim-clang-format' 
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'oblitum/youcompleteme'
 
 call plug#end()
 	
