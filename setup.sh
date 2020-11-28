@@ -43,6 +43,7 @@ sudo apt install -y \
 				libgmp-dev \
 				libmpc-dev \
 				libmpfr-dev \
+				libncurses5 \
 				libssl-dev \
 				libtool \
 				libpixman-1-dev \
@@ -84,6 +85,10 @@ python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
 EOF
+# Installing plugins
+vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
+# YCM plugin default C/C++ config
+cp .ycm_extra_conf.py ~/.vim/plugged/youcompleteme/.ycm_extra_conf.py
 
 # Zsh configuration
 sudo apt-get install -y zsh powerline fonts-powerline

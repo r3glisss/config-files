@@ -4,14 +4,20 @@ syntax on
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " Then launch vim and tape PlugInstall
 " - Avoid using standard Vim directory names like 'plugin'
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin('~/.vim/plugged')
-
 " Make sure you use single quotes
-" Plug 'rhysd/vim-clang-format' 
-" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'oblitum/youcompleteme'
-
+Plug 'rhysd/vim-clang-format' 
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'oblitum/youcompleteme'
+Plug 'vim-scripts/delimitMate.vim'
+Plug 'junegunn/fzf'
+Plug 'preservim/nerdcommenter'
 call plug#end()
 	
 set tabstop=2     " visual spaces for TAB character
@@ -48,3 +54,34 @@ set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 " Command Alias
 command Hexedit %!xxd
 command HexeditRevert %!xxd -r
+
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/.ycm_extra_conf.py"
+
+" NerdCommenter map leader key is '\'
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
