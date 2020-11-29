@@ -64,6 +64,7 @@ sudo apt install -y \
 				qemu \
 			 	sbt \
 				sed \
+				stlink-tools \
 				texinfo \
 				tmux \
 				vbindiff \
