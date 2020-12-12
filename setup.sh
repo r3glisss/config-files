@@ -64,7 +64,7 @@ sudo apt install -y \
 				qemu \
 			 	sbt \
 				sed \
-				stlink-tools \
+				snapd \
 				texinfo \
 				tmux \
 				vbindiff \
@@ -72,6 +72,9 @@ sudo apt install -y \
 				xclip \
 				zip \
 				zlib1g-dev
+
+# Snapd install
+sudo snap install code --classic
 
 # Desktop configuration
 mkdir ~/local-opt
@@ -144,6 +147,10 @@ EOF
 # Python 2
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 sudo python get-pip.py
+
+# STM Tools
+wget https://github.com/stlink-org/stlink/releases/download/v1.6.1/stlink-1.6.1-1_amd64.deb
+sudo apt install ./stlink-1.6.1-1_amd64.deb
 
 # Do some cleaning
 sudo apt-get autoremove -y
