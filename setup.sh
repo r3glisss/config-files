@@ -15,10 +15,12 @@ sudo apt-get upgrade -y
 # Essential packages
 sudo apt install -y \
 				autoconf \
+				autogen \
 				automake \
 				autotools-dev \
 				bc \
 				binutils \
+				binutils-dev \
 				bison \
 				build-essential \
 				clang \
@@ -52,7 +54,9 @@ sudo apt install -y \
 				linux-tools-common \
 				linux-tools-generic \
 				llvm \
+				llvm-dev \
 				ltrace \
+				ncurses-dev \
 				ninja-build \
 				nmap \
 				openssl \
@@ -61,14 +65,20 @@ sudo apt install -y \
 				python \
 				python3-dev \
 				python3-pip \
+				python-matplotlib \
+				python-networkx \
+				python-pygraphviz \
+				python-serial \
 				qemu \
 			 	sbt \
 				sed \
 				snapd \
 				texinfo \
+				tcl \
 				tmux \
 				vbindiff \
 				vim \
+				wget \
 				xclip \
 				zip \
 				zlib1g-dev
