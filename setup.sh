@@ -65,10 +65,6 @@ sudo apt install -y \
 				python \
 				python3-dev \
 				python3-pip \
-				python-matplotlib \
-				python-networkx \
-				python-pygraphviz \
-				python-serial \
 				qemu \
 			 	sbt \
 				sed \
@@ -90,6 +86,8 @@ sudo snap install code --classic
 mkdir ~/local-opt
 cp functions ~/local-opt/
 cp aliases ~/local-opt/
+cp myPacman ~/local-opt/
+chmod +x ~/local-opt/myPacman
 
 # Vim configuration
 cp .vimrc ~/.vimrc
@@ -99,13 +97,9 @@ python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
 EOF
-# Installing plugins
-vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
-# YCM plugin default C/C++ config
-cp .ycm_extra_conf.py ~/.vim/plugged/youcompleteme/.ycm_extra_conf.py
 
 # Zsh configuration
-sudo apt-get install -y zsh powerline fonts-powerline
+sudo apt-get install -y zsh 
 chsh -s /bin/zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
@@ -115,6 +109,11 @@ sed -i 's/source.*oh-my-zsh.sh/DISABLE_MAGIC_FUNCTIONS=true\n&/' ~/.zshrc
 # Keyboard
 cat >> ~/.zshrc << EOF
 setxkbmap fr
+EOF
+
+# Custom Term display
+cat >> ~/.zshrc << EOF
+term-display
 EOF
 
 # Custom aliases
@@ -138,7 +137,7 @@ source ~/local-opt/functions
 EOF
 
 # Powerline
-git clone https://github.com/powerline/fonts.git && (cd fonts && sh ./install.sh)
+pip install powerline-status
 cat >> ~/.zshrc << EOF
 if [ -f /usr/share/powerline/bindings/zsh/powerline.sh ]; then
   source /usr/share/powerline/bindings/zsh/powerline.sh
@@ -151,12 +150,7 @@ cat >> ~/.tmux.conf << EOF
 set-option -g mouse off
 set-option -g history-limit 5000
 set-option -g status-bg colour231
-source "/usr/share/powerline/bindings/tmux/powerline.conf"
 EOF
-
-# Python 2
-curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
-sudo python get-pip.py
 
 # STM Tools
 wget https://github.com/stlink-org/stlink/releases/download/v1.6.1/stlink-1.6.1-1_amd64.deb

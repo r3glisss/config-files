@@ -1,8 +1,12 @@
-cherche(){
+term-display(){
+  ~/local-opt/myPacman
+}
+
+look4(){
   grep --color -nri $1 *
 }
 
-cherche_ext(){
+look4ext(){
   find . -type f -name "*$1"
 }
 
@@ -18,11 +22,11 @@ cpstat(){
   echo
 }
 
-free_ram(){
+free-ram(){
 	while true; do free -h; sleep 2; clear; done
 }
 
-unslow_git(){
+unslow-git(){
 	git config --add oh-my-zsh.hide-status 1
   git config --add oh-my-zsh.hide-dirty 1
 }
