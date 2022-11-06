@@ -6,7 +6,7 @@ set -euxo pipefail
 echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
 curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
 
-sudo add-apt-repository universe
+sudo add-apt-repository ppa:deadsnakes/ppa
 
 # Update and upgrade
 sudo apt-get update
@@ -62,13 +62,14 @@ sudo apt install -y \
 				openssl \
 				patchutils \
 			 	pkg-config \
-				python \
+				python3\.10 \
 				python3-dev \
 				python3-pip \
 				qemu \
 			 	sbt \
 				sed \
 				snapd \
+        software-properties-common \
 				texinfo \
 				tcl \
 				tmux \
@@ -82,21 +83,9 @@ sudo apt install -y \
 # Snapd install
 sudo snap install code --classic
 
-# Desktop configuration
-mkdir ~/local-opt
-cp functions ~/local-opt/
-cp aliases ~/local-opt/
-cp myPacman ~/local-opt/
-chmod +x ~/local-opt/myPacman
-
 # Vim configuration
 cp .vimrc ~/.vimrc
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-cat >> ~/.vimrc << EOF
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-EOF
 
 # Zsh configuration
 sudo apt-get install -y zsh 
@@ -107,47 +96,11 @@ sed -i 's/robbyrussell/agnoster/g' ~/.zshrc
 sed -i 's/source.*oh-my-zsh.sh/DISABLE_MAGIC_FUNCTIONS=true\n&/' ~/.zshrc
 
 # Keyboard
-cat >> ~/.zshrc << EOF
-setxkbmap fr
-EOF
-
-# Custom Term display
-cat >> ~/.zshrc << EOF
-term-display
-EOF
-
-# Custom aliases
-cat >> ~/.zshenv << EOF
-source ~/local-opt/aliases
-EOF
-
-# Custom functions
-cat >> ~/.zshenv << EOF
-source ~/local-opt/functions
-EOF
-
-# Custom aliases
-cat >> ~/.bashrc << EOF
-source ~/local-opt/aliases
-EOF
-
-# Custom functions
-cat >> ~/.bashrc << EOF
-source ~/local-opt/functions
-EOF
-
-# Powerline
-pip install powerline-status
-cat >> ~/.zshrc << EOF
-if [ -f /usr/share/powerline/bindings/zsh/powerline.sh ]; then
-  source /usr/share/powerline/bindings/zsh/powerline.sh
-fi
-EOF
 
 # Tmux configuration
 # Customize tmux
 cat >> ~/.tmux.conf << EOF
-set-option -g mouse off
+set-option -g mouse on
 set-option -g history-limit 5000
 set-option -g status-bg colour231
 EOF
