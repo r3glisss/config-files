@@ -1,4 +1,0 @@
-# Utils
-alias c='clear'
-alias cpv='rsync -ah --info=progress2'
-alias free='free -m'
