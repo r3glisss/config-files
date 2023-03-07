@@ -1,36 +1,58 @@
-syntax on
-
-" To install vim plug 
+" -----------------------------------------------------------------------------
+" Plugins
+" -----------------------------------------------------------------------------
+" To install vim plug
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " Then launch vim and tape PlugInstall
 " - Avoid using standard Vim directory names like 'plugin'
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 
 call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
-Plug 'rhysd/vim-clang-format' 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'oblitum/youcompleteme'
-Plug 'vim-scripts/delimitMate.vim'
-Plug 'junegunn/fzf'
-Plug 'preservim/nerdcommenter'
+Plug 'rhysd/vim-clang-format',
+Plug 'scrooloose/nerdtree',
+Plug 'vim-scripts/AutoComplPop',
+Plug 'jiangmiao/auto-pairs',
+Plug 'junegunn/fzf', { 'do': 'fzf#install()'  },
+Plug 'junegunn/fzf.vim',
+
+" Autocompletion with ripgrep
+Plug 'lukas-reineke/cmp-rg'
+
+" Some colorscheme
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'sainnhe/edge'
+Plug 'tomasiser/vim-code-dark'
+Plug 'joshdick/onedark.vim'
+Plug 'pineapplegiant/spaceduck'
+Plug 'arcticicestudio/nord-vim'
+Plug 'cocopon/iceberg.vim'
 call plug#end()
-	
+
+" Define the leader key
+let mapleader = " "
+
+" Enable syntax highlighting
+syntax on
+
+" Project syntax
+set tags=./.tags;/
+
+" -----------------------------------------------------------------------------
+" Basic Settings
+"   Research any of these by running :help <setting>
+" -----------------------------------------------------------------------------
+set autoindent
+set autoread
 set tabstop=2     " visual spaces for TAB character
 set softtabstop=2 " number of spaces in tab for editing
 set expandtab     " insert spaces instead of TAB character
 set shiftwidth=2  " number of spaces to introduce on return for control structures, functions, etc
-
-set mouse=""
-set background=dark
-set paste
+set mouse=a
+set cursorline
 set number
 set showcmd
 set ignorecase
+colorscheme default
 
 " Always show statusline
 set laststatus=2
@@ -44,44 +66,53 @@ set statusline+=%{&fileformat}]              " file format
 set statusline+=%=                           " right align
 set statusline+=0x%-8B\                      " current char
 set statusline+=%-10.(%l,%c%V%)\ %<%P        " offset
+"set t_Co=256
+set rtp+=/home/cyrilb/.local/lib/python2.7/site-packages/powerline/bindings/vim
 
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
-
-" Powerline
-set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-
+" -----------------------------------------------------------------------------
 " Command Alias
+" -----------------------------------------------------------------------------
 command Hexedit %!xxd
 command HexeditRevert %!xxd -r
+command TrailingRemove :%s/\s\+$//e
 
-" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/.ycm_extra_conf.py"
+" -----------------------------------------------------------------------------
+" Plugin settings, mappings and autocommands
+" -----------------------------------------------------------------------------
+" Autocomplete plugin
+set complete+=kspell
+set completeopt=menuone,longest
+set shortmess+=c
+let g:acp_enableAtStartup = 1"
 
-" NerdCommenter map leader key is '\'
-" Create default mappings
-let g:NERDCreateDefaultMappings = 1
+" Navigate the complete menu items like CTRL+n / CTRL+p would.
+inoremap <expr> <Down> pumvisible() ? "<C-n>" :"<Down>"
+inoremap <expr> <Up> pumvisible() ? "<C-p>" : "<Up>"
 
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
+" Select the complete menu item like CTRL+y would.
+" inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
+inoremap <expr> <CR> pumvisible() ? "<C-y>" :"<CR>"
 
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
+" Cancel the complete menu item like CTRL+e would.
+inoremap <expr> <Left> pumvisible() ? "<C-e>" : "<Left>"
 
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
+" Navigation between the tabs
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>to :tabedit<Space>
 
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
+" This open the nerdtree on the right
+" let g:NERDTreeWinPos = "right"
 
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
+" Custom netrw configuration like Nerdtree
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+nnoremap <leader>e :Vexplore<CR>
 
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
-let g:NERDToggleCheckAllLines = 1
+" FZF remapping
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fs :Rg<CR>
