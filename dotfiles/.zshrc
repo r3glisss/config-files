@@ -289,5 +289,12 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+### History substring search plugin
+# git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/zsh-history-substring-search
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 ### Starting starship
 eval "$(starship init zsh)"
