@@ -65,7 +65,8 @@ sudo apt install -y \
 				vim \
 				wget \
 				xclip \
-				zip
+				zip \
+				zsh
 
 # Do some cleaning
 sudo apt-get autoremove -y
