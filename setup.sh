@@ -23,6 +23,7 @@ sudo apt install -y \
 				curl \
 				default-jdk \
 				device-tree-compiler \
+				exa \
 				flex \
 				gawk \
 				gcc \
